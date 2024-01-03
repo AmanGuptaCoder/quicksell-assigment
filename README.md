@@ -28,7 +28,7 @@ https://quicksell.notion.site/Frontend-assignment-fa2f7f8aaada4099916994bad6ec70
 
  ### Screenshots Of Web App
  <pre>
-<img src="./img/1.png" alt="1" width="1897" height="895" /> <img src="./img/2.png" alt="1" width="1920" height="938" /> <img src="./img/3.png" alt="1" width="1920" height="934" /> 
+<img src="./img/1.png" alt="1"  /><img src="./img/2.png" alt="1"  /><img src="./img/3.png" alt="1"  />
 </pre>
 
 
