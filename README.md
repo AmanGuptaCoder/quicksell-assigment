@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+<h1 align="center">QuickSell Frontend Assignment</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Kanban-Board-React-App
+It is a basic kanban board application that dynamically adjust to reflect the user's choice when a user clicks the "display" button and selects a grouping option.
+https://quicksell.notion.site/Frontend-assignment-fa2f7f8aaada4099916994bad6ec70c2
 
-## Available Scripts
+## Features
+1. Cards: It should be possible for users to make changes to the title, description, or any other pertinent information on the cards.
+2. Filtering and Searching: Make it possible to look for and filter particular cards using parameters such as priority, title, or due date.
+3. Collaboration and Comments: Include a comment system that enable users to exchange updates, talk about progress, and work together on tasks.
+4. API Integration: To retrieve and change data dynamically, connect your application to the given API.
+5. Responsiveness : This Kanban board is responsive and functions well across a range of platforms, such as PCs, tablets, and smartphones, by using responsive design.
 
-In the project directory, you can run:
+## Objectives :
+- The goal is to use ReactJs to construct an interactive kanban board application that offers three different methods to arrange data:
+  1. By Status
+  2. By user
+  3. By Priority
 
-### `npm start`
+- It ought to have two methods for sorting the tickets:
+1. Priority
+2. Title
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- It should be responsive and visually appealing.
+- To save the user's view state even after page reload. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ ### Screenshots Of Web App
+ <pre>
+<img src="./img/1.png" alt="1" width="1897" height="895" /> <img src="./img/2.png" alt="1" width="1920" height="938" /> <img src="./img/3.png" alt="1" width="1920" height="934" /> 
+</pre>
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Here is a step by step guide to set this project up on your local environment!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**1. Clone the Repository**
 
-### `npm run eject`
+Open a terminal or command prompt and navigate to the directory where you want to clone the repository. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Run the following command
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Using HTTPS
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    $ https://github.com/AmanGuptaCoder/quicksell-assigment.git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+**2. Navigate to the Project Directory**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Change your working directory to the project folder. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run the following command
 
-### Code Splitting
+    $ cd quicksell-assigment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**3. Install Dependencies**
 
-### Analyzing the Bundle Size
+Inside the project folder, install the required dependencies using npm. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Run the following command
 
-### Making a Progressive Web App
+    $ npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**4. Run the Development Server**
 
-### Advanced Configuration
+Start the development server to run the React application locally. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Run the following command
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    $ npm start
