@@ -1,139 +1,83 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import './App.css';
-import List from './Components/List/List';
-import Navbar from './Components/Navbar/Navbar';
+import React, { useState, useRef, useEffect } from "react";
+import "./App.css";
 
-function App() {
-  const [groupValue, setgroupValue] = useState(getStateFromLocalStorage() || 'status');
-  const [orderValue, setorderValue] = useState('title');
-  const [ticketDetails, setticketDetails] = useState([]);
+const App = () => {
+  const Ref = useRef(null);
+  const [timer, setTimer] = useState("05:00");
+  const [isRunning, setIsRunning] = useState(false);
+
+  const getTime = (e) => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
   
-  const statusList = ['In progress', 'Backlog', 'Todo', 'Done', 'Cancelled'];
-  const userList = ['Anoop sharma', 'Yogesh', 'Shankar Kumar', 'Ramesh', 'Suresh'];
-  const priorityList = [
-    { name: 'No priority', priority: 0 },
-    { name: 'Low', priority: 1 },
-    { name: 'Medium', priority: 2 },
-    { name: 'High', priority: 3 },
-    { name: 'Urgent', priority: 4 }
-  ];
+    return {
+      total,
+      minutes,
+      seconds,
+    };
+  };
 
-  // Utility functions
+  const startTimer = (e) => {
+    let { total, minutes, seconds } = getTime(e);
+    if (total >= 0) {
+      setTimer(
+        (minutes > 9 ? minutes : "0" + minutes) +
+          ":" +
+          (seconds > 9 ? seconds : "0" + seconds)
+      );
+    }
+  };
 
-  function saveStateToLocalStorage(state) {
-    localStorage.setItem('groupValue', JSON.stringify(state));
-  }
+  const clearTimer = (e) => {
+    setTimer("05:00");
 
-  function getStateFromLocalStorage() {
-    const storedState = localStorage.getItem('groupValue');
-    return storedState ? JSON.parse(storedState) : null;
-  }
+    if (Ref.current) clearInterval(Ref.current);
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
 
-  const orderDataByValue = useCallback(async (cardsArry) => {
-    // Sort logic
-    // ...
-    await setticketDetails(cardsArry);
-  }, [setticketDetails]);
-
-  // Handlers
-
-  function handleGroupValue(value) {
-    setgroupValue(value);
-    console.log(value);
-  }
-
-  function handleOrderValue(value) {
-    setorderValue(value);
-    console.log(value);
-  }
-
-  // useEffect for fetching and processing data
+  const getDeadTime = () => {
+    let deadline = new Date();
+    deadline.setMinutes(deadline.getMinutes() + 5);
+    return deadline;
+  };
 
   useEffect(() => {
-    saveStateToLocalStorage(groupValue);
-
-    async function fetchData() {
-      try {
-        const response = await axios.get('https://api.quicksell.co/v1/internal/frontend-assignment');
-        if (response.status === 200) {
-          const ticketArray = [];
-          for (let i = 0; i < response.data.tickets.length; i++) {
-            for (let j = 0; j < response.data.users.length; j++) {
-              if (response.data.tickets[i].userId === response.data.users[j].id) {
-                const ticketJson = { ...response.data.tickets[i], userObj: response.data.users[j] };
-                ticketArray.push(ticketJson);
-              }
-            }
-          }
-          await setticketDetails(ticketArray);
-          orderDataByValue(ticketArray);
-        }
-      } catch (error) {
-        // Handle error
-        console.error(error);
-      }
+    if (isRunning) {
+      clearTimer(getDeadTime());
+    } else {
+      if (Ref.current) clearInterval(Ref.current);
     }
+  }, [isRunning]);
 
-    fetchData();
-  }, [groupValue, orderDataByValue]);
+  const onClickStart = () => {
+    setIsRunning(true);
+  };
 
-  // JSX structure
+  const onClickStop = () => {
+    setIsRunning(false);
+  };
+
+  const onClickReset = () => {
+    setIsRunning(false);
+    setTimer("05:00");
+  };
 
   return (
-    <>
-      <Navbar
-        groupValue={groupValue}
-        orderValue={orderValue}
-        handleGroupValue={handleGroupValue}
-        handleOrderValue={handleOrderValue}
-      />
-      <section className="board-details">
-        <div className="board-details-list">
-          {(() => {
-            if (groupValue === 'status') {
-              return statusList.map((listItem) => (
-                <List
-                  key={listItem}
-                  groupValue="status"
-                  orderValue={orderValue}
-                  listTitle={listItem}
-                  listIcon=""
-                  statusList={statusList}
-                  ticketDetails={ticketDetails}
-                />
-              ));
-            } else if (groupValue === 'user') {
-              return userList.map((listItem) => (
-                <List
-                  key={listItem}
-                  groupValue="user"
-                  orderValue={orderValue}
-                  listTitle={listItem}
-                  listIcon=""
-                  userList={userList}
-                  ticketDetails={ticketDetails}
-                />
-              ));
-            } else if (groupValue === 'priority') {
-              return priorityList.map((listItem) => (
-                <List
-                  key={listItem.priority}
-                  groupValue="priority"
-                  orderValue={orderValue}
-                  listTitle={listItem.priority}
-                  listIcon=""
-                  priorityList={priorityList}
-                  ticketDetails={ticketDetails}
-                />
-              ));
-            }
-            return null;
-          })()}
+    <div className="container">
+      <div className="timer-box">
+        <h2>{timer}</h2>
+        <div className="buttons">
+          <button onClick={onClickStart}>Start</button>
+          <button onClick={onClickStop}>Stop</button>
+          <button onClick={onClickReset}>Reset</button>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
-}
+};
 
 export default App;
